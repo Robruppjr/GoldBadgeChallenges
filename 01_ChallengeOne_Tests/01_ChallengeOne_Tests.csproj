@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>_01_ChallengeOne_Tests</RootNamespace>
-    <Nullable>enable</Nullable>
+    <!-- <Nullable>enable</Nullable> -->
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
