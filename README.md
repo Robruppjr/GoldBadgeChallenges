@@ -55,3 +55,24 @@ Claim class
 Claim Repository 
 Test Class for Repository
 Program File/UI
+
+## Challenge 3:
+Komodo Insurance Badges
+Badge Class:
+    - BadgeID
+    -List of door names for access
+Door Class:
+    -Name
+Badge Repository:
+    -Create a Dictionary of Badges
+    -Key will be BadgeID
+    -Value will be List of Door Names.
+Door Repository:
+    -Create a List of Doors
+    -Doors need to be able to be added 
+    -Doors need to be removed
+    -Doors need to be Listed (no need for getting single door)
+Prograim:
+    - Createa a new badge
+    -Update doors from an existing badge.
+    -show a list with all badge numbers and door access

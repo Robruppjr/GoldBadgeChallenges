@@ -5,7 +5,7 @@ using System.Threading.Tasks;
     public class Claim
     {
         public Claim(){}
-        public Claim(ClaimType claimType, string description, decimal claimAmount, DateTime dateOfAccident, DateTime dateOfClaim)
+        public Claim(int ID, ClaimType claimType, string description, decimal claimAmount, DateTime dateOfAccident, DateTime dateOfClaim)
         {
             ClaimType = claimType;
             Description = description;

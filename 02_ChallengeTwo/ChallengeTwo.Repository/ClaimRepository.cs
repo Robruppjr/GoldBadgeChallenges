@@ -28,7 +28,7 @@ using System.Threading.Tasks;
                 var claim = _claimDatabase.Peek();
                 return claim;
             }
-            else
+            else 
             {
                 return null;
             }
