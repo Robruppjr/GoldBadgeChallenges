@@ -16,63 +16,33 @@
 
 ---
 
-## Challenge 2:
-Claim has properties:
-ClaimID
-ClaimType
-Description
-ClaimAmount
-DateOfIncident
-DateOfClaim
-IsValid
+## Challenge 2: *Komodo Claims*
+>This mock application allows for interacting with the claims in a Queue.
+### Allows users to:
+1. Choose a menu Item:
+    *this will allow the user to see all claims*
+2. Take care of next claim
+    *Show Claim details*
+    *ask if you want to deal with claim now(pull claim off top of queue or go back to the main menu.)*
+3. Enter a new claim
+        *ask to enter Claim id*
+        *claim type*
+        *claim description*
+        *amount of damage*
+        *date of accident*
+        *date of claim*
+        *Is claim valid*
 
-(Claim has to be made within 30 days of incident)
-31 is invalid
+---
 
-ClaimType (will be Enum):
-Car
-Home
-Theft
+## Challenge 3 *Komodo Badges*:
+>This mock application will allow the user to interact with Security bades in a Dictionary.
+### The Program will allow the user to:
+1. Create a new badge
+    *allows the user to create a badge that has a list of doors that is has acces to*
+2. Update doors from an existing badge.
+    *allows user to update the list of doors on a badge by adding or removing the badges*
+3. Show a list with all badge numbers and door access
+    *will list all badges and the doors they have access to*
 
-Methods in App:
--Show a Claims agent menu
--Choose a menu Item:
-    - see all claims
-    -take care of next claim
-        -Show Claim details
-        -ask if you want to deal with claim now(pull claim off top of queue or go back to the main menu.)
-    -enter a new claim
-        -ask to enter Claim id
-        -claim type
-        -claim description
-        -amount of damage
-        -date of accident
-        -date of claim
-        -Is claim valid
-
-Overall Goal:
-Claim class
-Claim Repository 
-Test Class for Repository
-Program File/UI
-
-## Challenge 3:
-Komodo Insurance Badges
-Badge Class:
-    - BadgeID
-    -List of door names for access
-Door Class:
-    -Name
-Badge Repository:
-    -Create a Dictionary of Badges
-    -Key will be BadgeID
-    -Value will be List of Door Names.
-Door Repository:
-    -Create a List of Doors
-    -Doors need to be able to be added 
-    -Doors need to be removed
-    -Doors need to be Listed (no need for getting single door)
-Prograim:
-    - Createa a new badge
-    -Update doors from an existing badge.
-    -show a list with all badge numbers and door access
+---

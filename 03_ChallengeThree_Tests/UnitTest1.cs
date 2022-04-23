@@ -27,8 +27,20 @@ public class UnitTest1
         _badgeRepo.AddBadgeToDB(badge3);
     }
     [Fact]
-    public void Test1()
+    public void AddBadgeToDB_ShouldReturnTrue()
     {
-
+        var badge = new Badge(new List<Door>{});
+        var expectingTrue = _badgeRepo.AddBadgeToDB(badge);
+        Assert.True(expectingTrue);
+    }
+    [Fact]
+    public void GetBadgeByID_ShouldReturnCorrectID_True()
+    {
+        var badge4 = new Badge(new List<Door>{});
+        _badgeRepo.AddBadgeToDB(badge4);
+        var badge = _badgeRepo.GetBadgeByID(4);
+        var actual=badge.BadgeID;
+        var expected = 4;
+        Assert.Equal(expected,actual);
     }
 }

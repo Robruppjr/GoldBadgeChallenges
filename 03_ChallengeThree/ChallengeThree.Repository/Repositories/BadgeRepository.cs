@@ -26,15 +26,14 @@ using System.Threading.Tasks;
         {
             return _badgeDB;
         }
-        public Badge GetBadgeByKey(int userKeyInput)
+        public Badge GetBadgeByID(int badgeID)
         {
-            foreach (KeyValuePair<int, Badge> badge in _badgeDB)
+            foreach(var badge in _badgeDB)
             {
-                if (badge.Key == userKeyInput)
+                if(badge.Key == badgeID)
                 {
                     return badge.Value;
                 }
-                return null;
             }
             return null;
         }

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
         {
             _badgeRepo = new BadgeRepository(_doorRepo);
         }
-
         public void Run()
         {
             SeedData();
@@ -88,52 +87,87 @@ using System.Threading.Tasks;
     }
     private void EditABadge()
     {
-        Console.ReadLine();
-        System.Console.WriteLine("What is the Badge number you want to update?");
-        var badges = _badgeRepo.GetBadges();
-        foreach (var badge in badges)
+        Console.Clear();
+        var availBadges = _badgeRepo.GetBadges();
+        foreach (var badge in availBadges)
         {
             DisplayBadges(badge);
         }
-        System.Console.WriteLine("Please Select a Badge by it's ID:");
-        var userSelectedInput = int.Parse(Console.ReadLine());
-        var selectedBadge = _badgeRepo.GetBadgeByKey(userSelectedInput);
-        if(selectedBadge != null)
-        {
-            DisplayBadgeDetails(selectedBadge);
-        }
-        Console.Clear();
-        System.Console.WriteLine("Would you like to 'add' or 'remove' a door?");
-        var userAddOrRemoveDoor = Console.ReadLine();
-        if(userAddOrRemoveDoor == "ADD".ToLower())
-        {
-                var addNewDoor = new Door();
-                var newBadge = new Badge();
-                System.Console.WriteLine("Please List the Door you would like to add:");
-                var userInput = Console.ReadLine();
-                addNewDoor.Name = userInput;
-                _doorRepo.AddDoorToTheDatabase(addNewDoor);
-                newBadge.Doors.Add(addNewDoor);
+        System.Console.WriteLine("What is the badge number to update:");
+        var userInputID = int.Parse(Console.ReadLine());
+        var userSelectedBadge = _badgeRepo.GetBadgeByID(userInputID);
+        if(userSelectedBadge != null)
+            {
+                Console.Clear();
+                var newDoor = new Door();
+                System.Console.WriteLine("Would you like to add or remove a door?");
+                var userInputAddRemove = Console.ReadLine();
+                if (userInputAddRemove == "ADD".ToLower())
+                {
+                    System.Console.WriteLine("List a door that it needs access to:");
+                    newDoor.Name = Console.ReadLine();
+                    var addedDoor = _doorRepo.AddDoorToTheDatabase(newDoor);
+                    userSelectedBadge.Doors.Add(newDoor);
+                    bool hasAssignedDoors = false;
+                    while(!hasAssignedDoors)
+                    {
+                        System.Console.WriteLine("Any Other Doors? y/n");
+                        var userInputHasAnotherDoor = Console.ReadLine();
+                        if(userInputHasAnotherDoor == "Y".ToLower())
+                        {
+                            var userNewDoor = new Door();
+                            System.Console.WriteLine("List a door that it needs access to:");
+                            userNewDoor.Name = Console.ReadLine();
+                            var selectedDoor = _doorRepo.AddDoorToTheDatabase(userNewDoor);
+                            userSelectedBadge.Doors.Add(userNewDoor);
+                        }
+                        else
+                        {
+                            hasAssignedDoors = true;
+                        }
+                    }
+                }
+                if(userInputAddRemove == "REMOVE".ToLower())
+                {
+                    Console.Clear();
+                    foreach(var door in userSelectedBadge.Doors)
+                    {
+                        DisplayDoors(door);
+                    }
+                    System.Console.WriteLine("Please list a door that needs to be removed:");
+                    var userInputRemove = Console.ReadLine();
+                    var selectedDoorRemove = _doorRepo.GetDoorByName(userInputRemove);
+                    userSelectedBadge.Doors.Remove(selectedDoorRemove);
+                    bool hasAssignedDoors = false;
+                    while(!hasAssignedDoors)
+                    {
+                        System.Console.WriteLine("Any Other Doors? y/n");
+                        var userInputHasAnotherDoor = Console.ReadLine();
+                        if(userInputHasAnotherDoor == "Y".ToLower())
+                        {
+                            var userNewDoorRemove = new Door();
+                            System.Console.WriteLine("List a door that it needs to be removed:");
+                            var userInputRemove2 = Console.ReadLine();
+                            var selectedDoorRemove2 = _doorRepo.GetDoorByName(userInputRemove2);
+                            userSelectedBadge.Doors.Remove(selectedDoorRemove2);
+                        }
+                        else
+                        {
+                            hasAssignedDoors = true;
+                        }
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("Sorry this Badge does not exist.");
+            }
                 PressAnyKeyToContinue();
         }
-        if(userAddOrRemoveDoor == "REMOVE".ToLower())
-        {
-            var oldDoor = new Door();
-            System.Console.WriteLine("Please List the Door you would like to remove:");
-            var userInput = Console.ReadLine();
-            bool isSuccessful = _doorRepo.RemoveDoor(userInput);
-            if(isSuccessful)
-                {
-                    System.Console.WriteLine("Door was removed");
-                }
-            else
-                {
-                    System.Console.WriteLine("Door was failed to be removed.");
-                }
-            PressAnyKeyToContinue();
-        }
     }
-
+    private void DisplayDoors(Door door)
+    {
+        System.Console.WriteLine($"{door.Name}");
+    }
     private void DisplayBadgeDetails(Badge selectedBadge)
     {
         foreach (var door in selectedBadge.Doors)
@@ -141,7 +175,6 @@ using System.Threading.Tasks;
                 System.Console.WriteLine(door.Name);
             }
     }
-
     private void AddABadge()
     {
         Console.Clear();
